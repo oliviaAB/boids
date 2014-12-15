@@ -36,7 +36,6 @@
 // ===========================================================================
 agent::agent(void)
 {
-	srand(time(NULL));
 	coord=new double[2];
 	coord[0]=(rand()/(double)RAND_MAX) * WIDTH;
 	coord[1]=(rand()/(double)RAND_MAX) * HEIGHT;
@@ -81,6 +80,29 @@ bool agent::near(const agent &other) const
 		res=1;
 	}
 	return res;
+}
+
+double* agent::speed1(agent* birds, int size, int pos)
+{
+	double* v1=new double[2];
+	v1[0]=0;
+	v1[1]=0;
+
+	int i=0;
+	int nb=0;
+	for(i=0;i<size;i++)
+	{
+		if(this->near(birds[i])==1 && i!=pos)
+		{
+			v1[0]=v1[0]+birds[i].get_speed()[0]-speed[0];
+			v1[1]=v1[1]+birds[i].get_speed()[1]-speed[1];
+			nb++;
+		}
+	}
+	v1[0]=v1[0]/nb;
+	v1[1]=v1[1]/nb;
+
+	return v1;
 }
 // ===========================================================================
 //                                Protected Methods

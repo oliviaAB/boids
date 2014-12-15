@@ -12,6 +12,7 @@
 // ===========================================================================
 #include <stdlib.h>
 #include <stdio.h>
+#include <ctime>
 #include "agent.h"
 
 
@@ -37,10 +38,14 @@
 // ===========================================================================
 int main(int argc, char* argv[])
 {
-  agent my_agent;
-  printf("x: %lf, y:%lf\n", my_agent.get_coord()[0], my_agent.get_coord()[1]);
+	srand(time(NULL));
+ 	agent my_agent1;
+ 	printf("x: %lf, y:%lf\n", my_agent1.get_coord()[0], my_agent1.get_coord()[1]);
+ 	agent my_agent2;
+ 	printf("x: %lf, y:%lf\n", my_agent2.get_coord()[0], my_agent2.get_coord()[1]);
+ 	printf("%d\n", my_agent1.near(my_agent2));
 
-  return 0;
+ 	return 0;
 }
 
 
