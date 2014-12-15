@@ -17,6 +17,7 @@
 //                                 Project Files
 // ===========================================================================
 #include <ctime>
+#include <cmath>
 #include "agent.h"
 
 
@@ -51,9 +52,11 @@ agent::agent(void)
 // ===========================================================================
 agent::~agent(void)
 {
+	delete coord;
+	coord=NULL;
+	delete speed;
+	speed=NULL;
 }
-
-
 
 // ===========================================================================
 //                                 Public Methods
@@ -67,6 +70,17 @@ double* agent::get_coord(void) const
 double* agent::get_speed(void) const
 {
 	return speed;
+}
+
+bool agent::near(const agent &other) const
+{
+	bool res=0;
+	double norm=sqrt(coord[0]*other.get_coord()[0]+coord[1]*other.get_coord()[1]);
+	if(norm<RADIUS)
+	{
+		res=1;
+	}
+	return res;
 }
 // ===========================================================================
 //                                Protected Methods
