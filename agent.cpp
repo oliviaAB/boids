@@ -82,6 +82,17 @@ bool agent::near(const agent &other) const
 	return res;
 }
 
+bool agent::near_obs(const agent &other) const
+{
+	bool res=0;
+	double norm=sqrt(coord[0]*other.get_coord()[0]+coord[1]*other.get_coord()[1]);
+	if(norm<CONTACT)
+	{
+		res=1;
+	}
+	return res;
+}
+
 double* agent::speed1(agent* birds, int size, int pos)
 {
 	double* v1=new double[2];
@@ -126,6 +137,29 @@ double* agent::speed2(agent* birds, int size, int pos)
 	v2[1]=v2[1]/nb;
 
 	return v2;
+}
+
+double* agent::speed3(agent* birds, int size, int pos)
+{
+	double* v3=new double[2];
+	v3[0]=0;
+	v3[1]=0;
+
+	int i=0;
+	int nb=0;
+	for(i=0;i<size;i++)
+	{
+		if(this->near_obs(birds[i])==1 && i!=pos)
+		{
+			v3[0]=v3[0]+birds[i].get_coord()[0]-coord[0];
+			v3[1]=v3[1]+birds[i].get_coord()[1]-coord[1];
+			nb++;
+		}
+	}
+	v3[0]=-v3[0]/nb;
+	v3[1]=-v3[1]/nb;
+
+	return v3;
 }
 // ===========================================================================
 //                                Protected Methods

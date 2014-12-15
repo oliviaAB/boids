@@ -70,8 +70,10 @@ class agent
     //                              Public Methods
     // =======================================================================
     bool near(const agent &other) const;
+    bool near_obs(const agent &other) const;
     double* speed1(agent* birds, int size, int pos);
     double* speed2(agent* birds, int size, int pos);
+    double* speed3(agent* birds, int size, int pos);
     // =======================================================================
     //                             Public Attributes
     // =======================================================================
