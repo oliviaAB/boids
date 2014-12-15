@@ -35,6 +35,7 @@
 // ===========================================================================
 agent::agent(void)
 {
+	srand(time(NULL));
 	coord=new double[2];
 	coord[0]=(rand()/(double)RAND_MAX) * WIDTH;
 	coord[1]=(rand()/(double)RAND_MAX) * HEIGHT;
@@ -43,9 +44,6 @@ agent::agent(void)
 	speed=new double[2];
 	speed[0]=1;
 	speed[1]=1;
-
-	width=WIDTH;
-	height=HEIGHT;
 }
 
 // ===========================================================================
@@ -55,10 +53,21 @@ agent::~agent(void)
 {
 }
 
+
+
 // ===========================================================================
 //                                 Public Methods
 // ===========================================================================
 
+double* agent::get_coord(void) const
+{
+	return coord;
+}
+
+double* agent::get_speed(void) const
+{
+	return speed;
+}
 // ===========================================================================
 //                                Protected Methods
 // ===========================================================================

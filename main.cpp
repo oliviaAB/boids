@@ -12,7 +12,7 @@
 // ===========================================================================
 #include <stdlib.h>
 #include <stdio.h>
-
+#include "agent.h"
 
 
 // ===========================================================================
@@ -37,7 +37,8 @@
 // ===========================================================================
 int main(int argc, char* argv[])
 {
-  printf("Hello World !\n");
+  agent my_agent;
+  printf("x: %lf, y:%lf\n", my_agent.get_coord()[0], my_agent.get_coord()[1]);
 
   return 0;
 }
