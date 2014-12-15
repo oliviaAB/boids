@@ -15,6 +15,7 @@
 // ===========================================================================
 #include <cstdio>
 #include <cstdlib>
+#include "parameters.h"
 
 
 
@@ -102,9 +103,15 @@ class agent
     // =======================================================================
     double* coord;
     double* speed;
+    int width;
+    int height;
+    /*
     static double R;
-    static double* gamma;
-
+    static double* GAMMA;
+    static int WIDTH;
+    static int HEIGHT;
+    static double time;
+    */
 };
 
 
