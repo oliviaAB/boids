@@ -104,6 +104,29 @@ double* agent::speed1(agent* birds, int size, int pos)
 
 	return v1;
 }
+
+double* agent::speed2(agent* birds, int size, int pos)
+{
+	double* v2=new double[2];
+	v2[0]=0;
+	v2[1]=0;
+
+	int i=0;
+	int nb=0;
+	for(i=0;i<size;i++)
+	{
+		if(this->near(birds[i])==1 && i!=pos)
+		{
+			v2[0]=v2[0]+birds[i].get_coord()[0]-coord[0];
+			v2[1]=v2[1]+birds[i].get_coord()[1]-coord[1];
+			nb++;
+		}
+	}
+	v2[0]=v2[0]/nb;
+	v2[1]=v2[1]/nb;
+
+	return v2;
+}
 // ===========================================================================
 //                                Protected Methods
 // ===========================================================================
