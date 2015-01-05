@@ -2,5 +2,8 @@
 #define HEIGHT 50
 #define RADIUS 5
 #define CONTACT 1
-#define TIME 1	
-#define GAMMA {1,1,1}
+#define TIME 1
+#define GAMMA1 1
+#define GAMMA2 1
+#define GAMMA3 1	
+//#define GAMMA {1,1,1}

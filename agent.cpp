@@ -82,7 +82,7 @@ bool agent::near(const agent &other) const
 	return res;
 }
 
-bool agent::near_obs(const agent &other) const
+bool agent::near_contact(const agent &other) const
 {
 	bool res=0;
 	double norm=sqrt(coord[0]*other.get_coord()[0]+coord[1]*other.get_coord()[1]);
@@ -149,7 +149,7 @@ double* agent::speed3(agent* birds, int size, int pos)
 	int nb=0;
 	for(i=0;i<size;i++)
 	{
-		if(this->near_obs(birds[i])==1 && i!=pos)
+		if(this->near_contact(birds[i])==1 && i!=pos)
 		{
 			v3[0]=v3[0]+birds[i].get_coord()[0]-coord[0];
 			v3[1]=v3[1]+birds[i].get_coord()[1]-coord[1];
@@ -161,6 +161,24 @@ double* agent::speed3(agent* birds, int size, int pos)
 
 	return v3;
 }
+
+void agent::new_speed(agent* birds, int size, int pos)
+{
+	double* v1=speed1(birds, size, pos);
+	double* v2=speed2(birds, size, pos);
+	double* v3=speed3(birds, size, pos);
+	speed[0]=speed[0]+TIME*(GAMMA1*v1[0]+GAMMA2*v2[0]+GAMMA3*v3[0]);
+	speed[1]=speed[1]+TIME*(GAMMA1*v1[1]+GAMMA2*v2[1]+GAMMA3*v3[1]);
+}
+
+void agent::new_coord(agent* birds, int size, int pos)
+{
+	new_speed(birds, size, pos);
+	coord[0]=coord[0]+TIME*speed[0];
+	coord[1]=coord[1]+TIME*speed[1];
+}
+
+
 // ===========================================================================
 //                                Protected Methods
 // ===========================================================================
