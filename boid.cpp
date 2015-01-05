@@ -36,6 +36,19 @@
 // ===========================================================================
 boid::boid(void)
 {
+	flock=NULL;
+	nb_agents=0;
+}
+
+boid::boid(int a_size)
+{
+	int i=0;
+	flock=new agent[a_size];
+	for(i=0;i<a_size;i++)
+	{
+		flock[i]=agent();
+	}
+	nb_agents=a_size;
 }
 
 // ===========================================================================
@@ -43,11 +56,31 @@ boid::boid(void)
 // ===========================================================================
 boid::~boid(void)
 {
+	delete flock;
+	flock=NULL;
+	nb_agents=0;
+
 }
 
 // ===========================================================================
 //                                 Public Methods
 // ===========================================================================
+
+agent* boid::get_flock(void) const 
+{
+	return flock;
+}
+
+int boid::get_nb_agents(void) const
+{
+	return nb_agents;
+}
+
+
+void boid::update(void)
+{
+
+}
 
 // ===========================================================================
 //                                Protected Methods
