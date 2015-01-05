@@ -41,9 +41,11 @@ int main(int argc, char* argv[])
 	srand(time(NULL));
  	agent my_agent1;
  	printf("x: %lf, y:%lf\n", my_agent1.get_coord()[0], my_agent1.get_coord()[1]);
- 	agent my_agent2;
- 	printf("x: %lf, y:%lf\n", my_agent2.get_coord()[0], my_agent2.get_coord()[1]);
- 	printf("%d\n", my_agent1.near(my_agent2));
+ 	agent* my_agent2=new agent();
+ 	printf("x: %lf, y:%lf\n", my_agent2->get_coord()[0], my_agent2->get_coord()[1]);
+ 	printf("%d\n", my_agent1.near(*my_agent2));
+ 	my_agent1.new_coord(my_agent2,1,2);
+ 	printf("new coord: %lf, %lf \n", my_agent1.get_coord()[0],my_agent1.get_coord()[1]);
 
  	return 0;
 }

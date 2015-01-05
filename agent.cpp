@@ -107,12 +107,14 @@ double* agent::speed1(agent* birds, int size, int pos)
 		{
 			v1[0]=v1[0]+birds[i].get_speed()[0]-speed[0];
 			v1[1]=v1[1]+birds[i].get_speed()[1]-speed[1];
-			nb++;
 		}
+		nb++;
+		printf("BOUCLE\n");
 	}
-	v1[0]=v1[0]/nb;
-	v1[1]=v1[1]/nb;
+		v1[0]=v1[0]/nb;
+		v1[1]=v1[1]/nb;
 
+	printf("v1: %lf, %lf\n", v1[0], v1[1]);
 	return v1;
 }
 
@@ -130,12 +132,13 @@ double* agent::speed2(agent* birds, int size, int pos)
 		{
 			v2[0]=v2[0]+birds[i].get_coord()[0]-coord[0];
 			v2[1]=v2[1]+birds[i].get_coord()[1]-coord[1];
-			nb++;
 		}
+		nb++;
 	}
 	v2[0]=v2[0]/nb;
 	v2[1]=v2[1]/nb;
 
+	printf("v2: %lf, %lf\n", v2[0], v2[1]);
 	return v2;
 }
 
@@ -153,12 +156,13 @@ double* agent::speed3(agent* birds, int size, int pos)
 		{
 			v3[0]=v3[0]+birds[i].get_coord()[0]-coord[0];
 			v3[1]=v3[1]+birds[i].get_coord()[1]-coord[1];
-			nb++;
 		}
+		nb++;
 	}
 	v3[0]=-v3[0]/nb;
 	v3[1]=-v3[1]/nb;
 
+	printf("v3: %lf, %lf\n", v3[0], v3[1]);
 	return v3;
 }
 
