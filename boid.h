@@ -36,6 +36,7 @@
 
 class boid
 {
+
   public :
     
     // =======================================================================
@@ -88,12 +89,15 @@ class boid
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
     };*/
+      /*
     boid(const boid &model)
     {
       printf("%s:%d: error: call to forbidden constructor.\n", __FILE__, __LINE__);
       exit(EXIT_FAILURE);
     };
+*/  
 
+    
 
     // =======================================================================
     //                              Protected Methods

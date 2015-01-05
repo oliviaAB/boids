@@ -42,12 +42,14 @@ boid::boid(void)
 
 boid::boid(int a_size)
 {
-	int i=0;
 	flock=new agent[a_size];
+	/*
+	int i=0;
 	for(i=0;i<a_size;i++)
 	{
-		flock[i]=agent();
+		flock[i].print_coord();
 	}
+	*/
 	nb_agents=a_size;
 }
 
@@ -80,6 +82,12 @@ int boid::get_nb_agents(void) const
 void boid::update(void)
 {
 
+	int i=0;
+	for(i=0;i<nb_agents;i++)
+	{
+		flock[i].new_coord(flock, nb_agents, i);
+		flock[i].print_coord();
+	}
 }
 
 // ===========================================================================

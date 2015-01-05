@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <ctime>
 #include "agent.h"
-
+#include "boid.h"
 
 // ===========================================================================
 //                             Include Project Files
@@ -39,6 +39,8 @@
 int main(int argc, char* argv[])
 {
 	srand(time(NULL));
+
+	/*
  	agent my_agent1;
  	printf("x: %lf, y:%lf\n", my_agent1.get_coord()[0], my_agent1.get_coord()[1]);
  	agent* my_agent2=new agent();
@@ -46,6 +48,10 @@ int main(int argc, char* argv[])
  	printf("%d\n", my_agent1.near(*my_agent2));
  	my_agent1.new_coord(my_agent2,1,2);
  	printf("new coord: %lf, %lf \n", my_agent1.get_coord()[0],my_agent1.get_coord()[1]);
+ 	*/
+
+ 	boid my_boid=boid(5);
+ 	my_boid.update();
 
  	return 0;
 }
