@@ -1,9 +1,9 @@
-#define WIDTH 50
-#define HEIGHT 50
-#define RADIUS 5
-#define CONTACT 1
+#define WIDTH 320
+#define HEIGHT 240
+#define RADIUS 100
+#define CONTACT 20
 #define TIME 1
-#define GAMMA1 1
-#define GAMMA2 1
-#define GAMMA3 1	
+#define GAMMA1 0.1
+#define GAMMA2 0.1
+#define GAMMA3 0.1	
 //#define GAMMA {1,1,1}

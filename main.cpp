@@ -50,7 +50,8 @@ int main(int argc, char* argv[])
  	printf("new coord: %lf, %lf \n", my_agent1.get_coord()[0],my_agent1.get_coord()[1]);
  	*/
 
- 	boid my_boid=boid(5);
+ 	boid my_boid=boid(10);
+ 	printf("\n");
  	my_boid.update();
 
  	return 0;

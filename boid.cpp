@@ -51,6 +51,11 @@ boid::boid(int a_size)
 	}
 	*/
 	nb_agents=a_size;
+	int i=0;
+	for(i=0;i<a_size;i++)
+	{
+		flock[i].print_coord();
+	}
 }
 
 // ===========================================================================
@@ -58,7 +63,7 @@ boid::boid(int a_size)
 // ===========================================================================
 boid::~boid(void)
 {
-	delete flock;
+	delete[] flock;
 	flock=NULL;
 	nb_agents=0;
 
@@ -88,6 +93,8 @@ void boid::update(void)
 		flock[i].new_coord(flock, nb_agents, i);
 		flock[i].print_coord();
 	}
+
+	printf("UPDATE DONE\n");
 }
 
 // ===========================================================================
