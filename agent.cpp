@@ -26,12 +26,14 @@
 agent::agent(void)
 {
 	coord=new double[2];
-	coord[0]=(rand()/(double)RAND_MAX) * WIDTH;
-	coord[1]=(rand()/(double)RAND_MAX) * HEIGHT;
+	//coord[0]=(rand()/(double)RAND_MAX) *WIDTH;
+	//coord[1]=(rand()/(double)RAND_MAX) * HEIGHT;
+	coord[0]=(rand()/(double)RAND_MAX) * (WIDTHCRE +100)+100;
+	coord[1]=(rand()/(double)RAND_MAX) * (HEIGHTCRE +100)+100;
 	//Initial speed: vx=1; vy=1
 	speed=new double[2];
-	speed[0]=1;
-	speed[1]=1;
+	speed[0]=0;
+	speed[1]=-1;
 }
 // ===========================================================================
 // Destructor
@@ -181,6 +183,18 @@ void agent::new_speed(agent* birds, int size, int pos)
 	double* v3=speed3(birds, size, pos);
 	speed[0]=speed[0]+TIME*(GAMMA1*v1[0]+GAMMA2*v2[0]+GAMMA3*v3[0]);
 	speed[1]=speed[1]+TIME*(GAMMA1*v1[1]+GAMMA2*v2[1]+GAMMA3*v3[1]);
+
+	//norm max = VMAX
+
+	double norm=sqrt(speed[0]*speed[0]+speed[1]*speed[1]);
+
+	if(norm>VMAX)
+	{
+		double max=(norm/VMAX);
+		speed[0]=speed[0]/max;
+		speed[1]=speed[1]/max;
+	}
+	
 }
 
 
@@ -189,6 +203,32 @@ void agent::new_coord(agent* birds, int size, int pos)
 	new_speed(birds, size, pos);
 	coord[0]=coord[0]+TIME*speed[0];
 	coord[1]=coord[1]+TIME*speed[1];
+
+
+
+	//if the agent reaches the superior border
+	if(coord[1]<(H + 50))
+	{
+		speed[1]=speed[1]+1;
+	}
+
+	//if the agent reaches the inferior border
+	if(coord[1]>(WIDTH-H))
+	{
+		speed[1]=speed[1]-1;
+	}
+
+	//if the agent reaches the left border
+	if(coord[0]<(V+50))
+	{
+		speed[0]=speed[0]+1;
+	}
+
+	//if the agent reaches the inferior border
+	if(coord[0]>(HEIGHT-V))
+	{
+		speed[0]=speed[0]-1;
+	}
 }
 
 void agent::print_coord(void) const

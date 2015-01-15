@@ -4,6 +4,7 @@
 #include "bwindow.h"
 #include "agent.h"
 #include "boid.h"
+#include "parameters.h"
 
 
 int main()
@@ -11,10 +12,10 @@ int main()
 
 	srand(time(NULL));
 
-    bwindow win(640,480);
+    bwindow win((WIDTH + 100),(HEIGHT+100));
     printf("%d\n",win.init());
     win.map();
-	boid my_boid=boid(10);
+	boid my_boid=boid(200);
     for(;;)
     {
 		int ev = win.parse_event();
@@ -32,13 +33,15 @@ int main()
 			printf("configure\n"); break;
 		}
 	
-		win.draw_fsquare(0,0,640,480,0xFFFFFF);
+		
+		win.draw_fsquare(0,0,(WIDTH+100),(HEIGHT+100),0xFFFFFF);
+		win.draw_fsquare(0,400,0,400,0x00FF00);
 		win.draw_boid(my_boid);
+		my_boid.update();
 		
 
-		my_boid.update();
-
 		usleep(100000);
+
 
 		printf("!!!!!!!!!!\n");
 		printf("\n");
