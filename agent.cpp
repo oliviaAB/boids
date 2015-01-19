@@ -32,8 +32,8 @@ agent::agent(void)
 	coord[1]=(rand()/(double)RAND_MAX) * (HEIGHTCRE +100)+100;
 	//Initial speed: vx=1; vy=1
 	speed=new double[2];
-	speed[0]=0;
-	speed[1]=-1;
+	speed[0]=10;
+	speed[1]=0;
 }
 // ===========================================================================
 // Destructor
@@ -63,7 +63,7 @@ double* agent::get_coord(void) const
 bool agent::near(const agent &other) const
 {
 	bool res=0;
-	//double norm=sqrt(coord[0]*other.get_coord()[0]+coord[1]*other.get_coord()[1]);
+	//double norm=sqrt(coord[0]*other.get_coord()[0]+ coord[1]*other.get_coord()[1]);
 	double norm=sqrt((coord[0]-other.get_coord()[0])*(coord[0]-other.get_coord()[0])+(coord[1]-other.get_coord()[1])*(coord[1]-other.get_coord()[1]));
 	if(norm<RADIUS)
 	{
@@ -87,6 +87,18 @@ bool agent::near_contact(const agent &other) const
 	return res;
 }
 
+bool agent::near_obs(const objet &my_obj) const
+{
+	bool res=0;
+	double norm=sqrt((coord[0]-my_obj.get_coord()[0])*(coord[0]-my_obj.get_coord()[0])+(coord[1]-my_obj.get_coord()[1])*(coord[1]-my_obj.get_coord()[1]));
+	if(norm<(CONTACT+10))
+	{
+		res=1;
+	}
+	return res;
+
+}
+
 
 double* agent::speed1(agent* birds, int size, int pos)
 {
@@ -107,7 +119,7 @@ double* agent::speed1(agent* birds, int size, int pos)
 	test++;
 	}
 
-	printf("%d\n",test);
+	//printf("%d\n",test);
 
 	if(nb!=0)
 	{
@@ -147,7 +159,7 @@ double* agent::speed2(agent* birds, int size, int pos)
 }
 
 
-double* agent::speed3(agent* birds, int size, int pos)
+double* agent::speed3(agent* birds, int size, int pos, objet* obj, int nb_obj)
 {
 	double* v3=new double[2];
 	v3[0]=0;
@@ -170,17 +182,42 @@ double* agent::speed3(agent* birds, int size, int pos)
 		v3[1]=-v3[1]/nb;
 	}
 
+	nb=0;
+	double* vo=new double[2];
+	vo[0]=0;
+	vo[1]=0;
+
+
+	for(i=0;i<nb_obj;i++)
+	{
+		if(this->near_obs(obj[i])==1 && i!=pos)
+		{
+			vo[0]=vo[0]+obj[i].get_coord()[0]-coord[0];
+			vo[1]=vo[1]+obj[i].get_coord()[1]-coord[1];
+			nb++;
+		}
+	}
+
+		if(nb!=0)
+	{
+		vo[0]=-vo[0]/nb;
+		vo[1]=-vo[1]/nb;
+	}
+
+	v3[0]=v3[0]+vo[0];
+	v3[1]=v3[1]+vo[1];
+
 	//printf("v3: %lf, %lf\n", v3[0], v3[1]);
 	return v3;
 }
 
 
 
-void agent::new_speed(agent* birds, int size, int pos)
+void agent::new_speed(agent* birds, int size, int pos, objet* obj, int nb_obj)
 {
 	double* v1=speed1(birds, size, pos);
 	double* v2=speed2(birds, size, pos);
-	double* v3=speed3(birds, size, pos);
+	double* v3=speed3(birds, size, pos, obj, nb_obj);
 	speed[0]=speed[0]+TIME*(GAMMA1*v1[0]+GAMMA2*v2[0]+GAMMA3*v3[0]);
 	speed[1]=speed[1]+TIME*(GAMMA1*v1[1]+GAMMA2*v2[1]+GAMMA3*v3[1]);
 
@@ -198,16 +235,16 @@ void agent::new_speed(agent* birds, int size, int pos)
 }
 
 
-void agent::new_coord(agent* birds, int size, int pos)
+void agent::new_coord(agent* birds, int size, int pos, objet* obj, int nb_obj)
 {
-	new_speed(birds, size, pos);
+	new_speed(birds, size, pos, obj, nb_obj);
 	coord[0]=coord[0]+TIME*speed[0];
 	coord[1]=coord[1]+TIME*speed[1];
 
 
 
 	//if the agent reaches the superior border
-	if(coord[1]<(H + 50))
+	if(coord[1]<(H)) //+50
 	{
 		speed[1]=speed[1]+1;
 	}
@@ -219,12 +256,12 @@ void agent::new_coord(agent* birds, int size, int pos)
 	}
 
 	//if the agent reaches the left border
-	if(coord[0]<(V+50))
+	if(coord[0]<(V)) //+50
 	{
 		speed[0]=speed[0]+1;
 	}
 
-	//if the agent reaches the inferior border
+	//if the agent reaches the right border
 	if(coord[0]>(HEIGHT-V))
 	{
 		speed[0]=speed[0]-1;

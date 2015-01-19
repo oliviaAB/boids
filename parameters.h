@@ -1,13 +1,13 @@
-#define WIDTH 540
-#define HEIGHT 380
-#define WIDTHCRE 100
-#define HEIGHTCRE 100
-#define RADIUS 100
+#define WIDTH 800
+#define HEIGHT 800
+#define WIDTHCRE 500
+#define HEIGHTCRE 500
+#define RADIUS 70
 #define CONTACT 20
-#define TIME 1
-#define GAMMA1 0.15
-#define GAMMA2 0.15
-#define GAMMA3 1
+#define TIME  1
+#define GAMMA1 0.30 //0.15
+#define GAMMA2 0.30 //0.15
+#define GAMMA3 2 //1
 #define VMAX 10
 #define H 100	
 #define V 100

@@ -3,22 +3,21 @@
 //
 //
 //****************************************************************************
-#ifndef __AGENT_H__
-#define __AGENT_H__
+#ifndef __OBJET_H__
+#define __OBJET_H__
 // ===========================================================================
 // Libraries
 // ===========================================================================
 #include <cstdio>
 #include <cstdlib>
 #include "parameters.h"
-#include "objet.h"
 // ===========================================================================
 // Project Files
 // ===========================================================================
 // ===========================================================================
 // Class declarations
 // ===========================================================================
-class agent
+class objet
 {
     public :
     // =======================================================================
@@ -27,16 +26,15 @@ class agent
     // =======================================================================
     // Constructors
     // =======================================================================
-    agent(void);
+    objet(void);
     // =======================================================================
     // Destructor
     // =======================================================================
-    virtual ~agent(void);
+    virtual ~objet(void);
     // =======================================================================
     // Accessors: getters
     // =======================================================================
     double* get_coord(void) const;
-    double* get_speed(void) const;
     // =======================================================================
     // Accessors: setters
     // =======================================================================
@@ -46,14 +44,6 @@ class agent
     // =======================================================================
     // Public Methods
     // =======================================================================
-    bool near(const agent &other) const;
-    bool near_contact(const agent &other) const;
-    bool near_obs(const objet &my_obj) const;
-    double* speed1(agent* birds, int size, int pos);
-    double* speed2(agent* birds, int size, int pos);
-    double* speed3(agent* birds, int size, int pos, objet* obj, int nb_obj);
-    void new_speed(agent* birds, int size, int pos,  objet* obj, int nb_obj);
-    void new_coord(agent* birds, int size, int pos,  objet* obj, int nb_obj);
     void print_coord(void) const;
     // =======================================================================
     // Public Attributes
@@ -81,7 +71,6 @@ class agent
     // Protected Attributes
     // =======================================================================
     double* coord;
-    double* speed;
     /*
     static double R;
     static double* GAMMA;
@@ -102,4 +91,4 @@ class agent
 // ===========================================================================
 // Inline functions' definition
 // ===========================================================================
-    #endif // __AGENT_H__
+    #endif // __OBJET_H__

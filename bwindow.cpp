@@ -216,7 +216,7 @@ unsigned int bwindow::get_height()
     return height;
 }
 
-void bwindow::draw_boid(const boid &my_boid)
+void bwindow::draw_boid(const boid &my_boid, objet* obj, int nb_obj)
 {
     int i=0;
     double* coord= new double[2];
@@ -228,8 +228,18 @@ void bwindow::draw_boid(const boid &my_boid)
         coord=my_boid.get_flock()[i].get_coord();
         int x=(int)(coord[0]);
         int y=(int)(coord[1]);
-        this->draw_fsquare(x-1,y-1,x+1,y+1,0xFF0000);
+        //this->draw_text(x,y,0x0,"v",strlen("v"));
+        this->draw_fsquare(x-1,y-1,x+1,y+1,0x000000);
         //this->draw_point(x,y,0xFF00);
     }
-    printf("END\n");
-}
+
+
+    for(i=0;i<nb_obj;i++)
+    {
+        x=(int)(obj[i].get_coord()[0]);
+        y=(int)(obj[i].get_coord()[1]);
+        this->draw_fsquare(x-2,y-2,x+2,y+2,0x6600FF);
+
+    }
+    //printf("END\n");
+}  

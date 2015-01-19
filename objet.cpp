@@ -3,106 +3,60 @@
 //
 //
 //****************************************************************************
-
-
- 
- 
 // ===========================================================================
-//                                   Libraries
+// Libraries
 // ===========================================================================
-
-
-
 // ===========================================================================
-//                                 Project Files
+// Project Files
 // ===========================================================================
-#include "boid.h"
-
-
-
-
+#include <ctime>
+#include <cmath>
+#include "objet.h"
 //############################################################################
-//                                                                           #
-//                           Class boid                            #
-//                                                                           #
+// #
+// Class objet #
+// #
 //############################################################################
-
 // ===========================================================================
-//                         Definition of static attributes
+// Definition of static attributes
 // ===========================================================================
-
 // ===========================================================================
-//                                  Constructors
+// Constructors
 // ===========================================================================
-boid::boid(void)
+objet::objet(void)
 {
-	flock=NULL;
-	nb_agents=0;
-}
-
-boid::boid(int a_size)
-{
-	flock=new agent[a_size];
-	/*
-	int i=0;
-	for(i=0;i<a_size;i++)
-	{
-		flock[i].print_coord();
-	}
-	*/
-	nb_agents=a_size;
-	int i=0;
-	/*
-	for(i=0;i<a_size;i++)
-	{
-		flock[i].print_coord();
-	}
-	*/
-}
-
-// ===========================================================================
-//                                  Destructor
-// ===========================================================================
-boid::~boid(void)
-{
-	delete[] flock;
-	flock=NULL;
-	nb_agents=0;
+	coord=new double[2];
+	//coord[0]=(rand()/(double)RAND_MAX) *WIDTH;
+	//coord[1]=(rand()/(double)RAND_MAX) * HEIGHT;
+	coord[0]=(rand()/(double)RAND_MAX) * (WIDTHCRE +100)+100;
+	coord[1]=(rand()/(double)RAND_MAX) * (HEIGHTCRE +100)+100;
 
 }
-
 // ===========================================================================
-//                                 Public Methods
+// Destructor
 // ===========================================================================
-
-agent* boid::get_flock(void) const 
+objet::~objet(void)
 {
-	return flock;
+	delete coord;
+	coord=NULL;
+
 }
-
-int boid::get_nb_agents(void) const
+// ===========================================================================
+// Public Methods
+// ===========================================================================
+double* objet::get_coord(void) const
 {
-	return nb_agents;
+	return coord;
 }
 
 
-void boid::update( objet* obj, int nb_obj)
+void objet::print_coord(void) const
 {
-
-	int i=0;
-	for(i=0;i<nb_agents;i++)
-	{
-		flock[i].new_coord(flock, nb_agents, i, obj, nb_obj);
-		//flock[i].print_coord();
-	}
-
-	//printf("UPDATE DONE\n");
+	printf("x= %lf, y= %lf\n", coord[0], coord[1]);
 }
-
 // ===========================================================================
-//                                Protected Methods
+// Protected Methods
 // ===========================================================================
-
 // ===========================================================================
-//                               Non inline accessors
+// Non inline accessors
 // ===========================================================================

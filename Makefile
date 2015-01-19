@@ -1,9 +1,11 @@
-all: main test.out
+all: test.out 
+#main
 
-main: main.cpp agent.o boid.o
-	g++ -Wall -o main main.cpp agent.o boid.o
 
-agent.o: agent.h agent.cpp parameters.h
+#main: main.cpp agent.o boid.o
+#	g++ -Wall -o main main.cpp agent.o boid.o
+
+agent.o: agent.h agent.cpp parameters.h objet.h
 	g++ -Wall -o agent.o agent.cpp -c
 
 boid.o: boid.h boid.cpp agent.h
@@ -11,15 +13,18 @@ boid.o: boid.h boid.cpp agent.h
 
 #--------------------------------------------------------------
 
-test.out: mainbwindows.o bwindow.o agent.o boid.o 
-	g++ -o test.out mainbwindows.o bwindow.o agent.o boid.o  -lX11 -L/usr/X11R6/lib
+test.out: mainbwindows.o bwindow.o agent.o boid.o objet.o
+	g++ -o test.out mainbwindows.o bwindow.o agent.o boid.o objet.o -lX11 -L/usr/X11R6/lib
 
 #test.out: mainbwindows.cpp bwindow.o agent.o boid.o 
 #	g++ -o test.out mainbwindows.cpp bwindow.o agent.o boid.o  -lX11 -L/usr/X11R6/lib
 
 
-mainbwindows.o: mainbwindows.cpp agent.h boid.h
-	g++ -c mainbwindows.cpp 
+mainbwindows.o: mainbwindows.cpp agent.h boid.h objet.h
+	g++ -Wall -c mainbwindows.cpp 
 
 bwindow.o: bwindow.cpp bwindow.h agent.h boid.h
-	g++ -c bwindow.cpp
+	g++ -Wall -c bwindow.cpp
+
+objet.o: objet.h objet.cpp parameters.h
+	g++ -Wall objet.cpp -c

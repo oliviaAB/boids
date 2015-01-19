@@ -5,6 +5,7 @@
 #include "agent.h"
 #include "boid.h"
 #include "parameters.h"
+#include "objet.h"
 
 
 int main()
@@ -15,7 +16,9 @@ int main()
     bwindow win((WIDTH + 100),(HEIGHT+100));
     printf("%d\n",win.init());
     win.map();
-	boid my_boid=boid(200);
+	boid my_boid=boid(100);
+	objet* obj=new objet[5];
+	int nb_obj=5;
     for(;;)
     {
 		int ev = win.parse_event();
@@ -34,17 +37,17 @@ int main()
 		}
 	
 		
-		win.draw_fsquare(0,0,(WIDTH+100),(HEIGHT+100),0xFFFFFF);
-		win.draw_fsquare(0,400,0,400,0x00FF00);
-		win.draw_boid(my_boid);
-		my_boid.update();
+		win.draw_fsquare(0,0,(WIDTH+100),(HEIGHT+100),0xACD1E9);
+		//win.draw_fsquare(0,400,0,400,0x00FF00);
+		win.draw_boid(my_boid, obj, nb_obj);
+		my_boid.update(obj, nb_obj);
 		
 
-		usleep(100000);
+		usleep(50000); //50000
 
 
-		printf("!!!!!!!!!!\n");
-		printf("\n");
+		//printf("!!!!!!!!!!\n");
+		//printf("\n");
 
 		//win.draw_square(200,200,202,202,0xFF00);
 

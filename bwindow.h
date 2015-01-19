@@ -93,7 +93,7 @@ class bwindow
 
 
 //Draw all birds of boids
-    void draw_boid(const boid &my_boid);
+    void draw_boid(const boid &my_boid, objet* obj, int nb_obj);
 
 };
             
