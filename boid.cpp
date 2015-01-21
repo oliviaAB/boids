@@ -38,11 +38,15 @@ boid::boid(void)
 {
 	flock=NULL;
 	nb_agents=0;
+	pred_flock=NULL;
+	nb_pred=0;
 }
 
-boid::boid(int a_size)
+boid::boid(int a_size, int p_size)
 {
 	flock=new agent[a_size];
+	pred_flock=new pred[p_size];
+
 	/*
 	int i=0;
 	for(i=0;i<a_size;i++)
@@ -51,7 +55,8 @@ boid::boid(int a_size)
 	}
 	*/
 	nb_agents=a_size;
-	int i=0;
+	nb_pred=p_size;
+
 	/*
 	for(i=0;i<a_size;i++)
 	{
@@ -85,16 +90,40 @@ int boid::get_nb_agents(void) const
 	return nb_agents;
 }
 
+pred* boid::get_pred_flock(void) const 
+{
+	return pred_flock;
+}
+
+int boid::get_nb_pred(void) const
+{
+	return nb_pred;
+}
+
+
 
 void boid::update( objet* obj, int nb_obj)
 {
 
 	int i=0;
+	int k=0;
+	double* vpred=new double[(2*nb_pred)];
+
+		for(i=0;i<nb_pred;i++)
+	{
+		pred_flock[i].up_coord();
+		vpred[k]=pred_flock[i].get_coord()[0];
+		vpred[k+1]=pred_flock[i].get_coord()[1];
+		k=k+2;
+	}
+
+
 	for(i=0;i<nb_agents;i++)
 	{
-		flock[i].new_coord(flock, nb_agents, i, obj, nb_obj);
+		flock[i].new_coord(flock, nb_agents, i, obj, nb_obj,vpred, nb_pred);
 		//flock[i].print_coord();
 	}
+
 
 	//printf("UPDATE DONE\n");
 }

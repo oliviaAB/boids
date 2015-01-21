@@ -233,6 +233,14 @@ void bwindow::draw_boid(const boid &my_boid, objet* obj, int nb_obj)
         //this->draw_point(x,y,0xFF00);
     }
 
+    for(i=0;i<my_boid.get_nb_pred();i++)
+    {
+        coord=my_boid.get_pred_flock()[i].get_coord();
+        int x=(int)(coord[0]);
+        int y=(int)(coord[1]);
+        //this->draw_text(x,y,0x0,"v",strlen("v"));
+        this->draw_fsquare(x-5,y-5,x+5,y+5,0xFF0000);
+    }
 
     for(i=0;i<nb_obj;i++)
     {

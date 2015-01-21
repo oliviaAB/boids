@@ -52,8 +52,9 @@ class agent
     double* speed1(agent* birds, int size, int pos);
     double* speed2(agent* birds, int size, int pos);
     double* speed3(agent* birds, int size, int pos, objet* obj, int nb_obj);
-    void new_speed(agent* birds, int size, int pos,  objet* obj, int nb_obj);
-    void new_coord(agent* birds, int size, int pos,  objet* obj, int nb_obj);
+    double* speed4(double* vpred, int nb_pred);
+    void new_speed(agent* birds, int size, int pos,  objet* obj, int nb_obj, double* vpred, int nb_pred);
+    void new_coord(agent* birds, int size, int pos,  objet* obj, int nb_obj,double* vpred, int nb_pred);
     void print_coord(void) const;
     // =======================================================================
     // Public Attributes

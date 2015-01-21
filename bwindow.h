@@ -6,6 +6,7 @@
 
 #include "agent.h"
 #include "boid.h"
+#include "pred.h"
 
 #define ERR_BAD_FONT -10
 #define ERR_BAD_DISPLAY -5

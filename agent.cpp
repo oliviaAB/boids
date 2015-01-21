@@ -211,15 +211,44 @@ double* agent::speed3(agent* birds, int size, int pos, objet* obj, int nb_obj)
 	return v3;
 }
 
+double* agent::speed4(double* vpred, int nb_pred)
+{
+	double* v4=new double[2];
+	v4[0]=0;
+	v4[1]=0;
+	int i=0;
+	int nb=0;
+	for(i=0;i<(2*nb_pred);i++)
+	{
+		double norm=sqrt((coord[0]-vpred[i])*(coord[0]-vpred[i])+(coord[1]-vpred[i+1])*(coord[1]-vpred[i+1]));
+		if(norm<RADIUS)
+		{
+			v4[0]=v4[0]-(vpred[i]-coord[0])/norm;
+			v4[1]=v4[1]-(vpred[i+1]-coord[1])/norm;
+			nb++;
+		}	
+	}
+	if(nb!=0)
+	{
+		v4[0]=v4[0]/nb;
+		v4[1]=v4[1]/nb;
+	}
+
+	//printf("v2: %lf, %lf\n", v2[0], v2[1]);
+	return v4;
+
+}
 
 
-void agent::new_speed(agent* birds, int size, int pos, objet* obj, int nb_obj)
+
+void agent::new_speed(agent* birds, int size, int pos, objet* obj, int nb_obj, double* vpred, int nb_pred)
 {
 	double* v1=speed1(birds, size, pos);
 	double* v2=speed2(birds, size, pos);
 	double* v3=speed3(birds, size, pos, obj, nb_obj);
-	speed[0]=speed[0]+TIME*(GAMMA1*v1[0]+GAMMA2*v2[0]+GAMMA3*v3[0]);
-	speed[1]=speed[1]+TIME*(GAMMA1*v1[1]+GAMMA2*v2[1]+GAMMA3*v3[1]);
+	double* v4=speed4(vpred, nb_pred);
+	speed[0]=speed[0]+TIME*(GAMMA1*v1[0]+GAMMA2*v2[0]+GAMMA3*v3[0]+GAMMA4*v4[0]);
+	speed[1]=speed[1]+TIME*(GAMMA1*v1[1]+GAMMA2*v2[1]+GAMMA3*v3[1]+GAMMA4*v4[1]);
 
 	//norm max = VMAX
 
@@ -235,9 +264,9 @@ void agent::new_speed(agent* birds, int size, int pos, objet* obj, int nb_obj)
 }
 
 
-void agent::new_coord(agent* birds, int size, int pos, objet* obj, int nb_obj)
+void agent::new_coord(agent* birds, int size, int pos, objet* obj, int nb_obj,double* vpred, int nb_pred)
 {
-	new_speed(birds, size, pos, obj, nb_obj);
+	new_speed(birds, size, pos, obj, nb_obj, vpred, nb_pred);
 	coord[0]=coord[0]+TIME*speed[0];
 	coord[1]=coord[1]+TIME*speed[1];
 

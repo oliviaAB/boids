@@ -8,7 +8,9 @@
 #define GAMMA1 0.30 //0.15
 #define GAMMA2 0.30 //0.15
 #define GAMMA3 2 //1
+#define GAMMA4 10
 #define VMAX 10
 #define H 100	
 #define V 100
+#define VPRED 12
 //#define GAMMA {1,1,1}
