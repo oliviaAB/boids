@@ -4,6 +4,7 @@
 #define HEIGHTCRE 500
 #define RADIUS 70
 #define CONTACT 20
+#define RPRED 30
 #define TIME  1
 #define GAMMA1 0.30 //0.15
 #define GAMMA2 0.30 //0.15

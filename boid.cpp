@@ -111,7 +111,7 @@ void boid::update( objet* obj, int nb_obj)
 
 		for(i=0;i<nb_pred;i++)
 	{
-		pred_flock[i].up_coord();
+		pred_flock[i].up_coord(flock, nb_agents);
 		vpred[k]=pred_flock[i].get_coord()[0];
 		vpred[k+1]=pred_flock[i].get_coord()[1];
 		k=k+2;

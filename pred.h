@@ -53,8 +53,8 @@ class pred : public agent
     virtual ~pred(void);
 
     void vrand(void);
-    void up_coord(void);
-    void up_speed(void);
+    void up_coord(agent* flock, int size);
+    void up_speed(agent* flock, int size);
 
     // =======================================================================
     //                            Accessors: getters
