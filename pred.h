@@ -47,6 +47,7 @@ class pred : public agent
     //                               Constructors
     // =======================================================================
     pred(void);
+    pred(const pred &model);
     // =======================================================================
     //                                Destructor
     // =======================================================================
@@ -55,6 +56,7 @@ class pred : public agent
     void vrand(void);
     void up_coord(agent* flock, int size);
     void up_speed(agent* flock, int size);
+    int get_time_eaten(void) const;
 
     // =======================================================================
     //                            Accessors: getters

@@ -34,7 +34,19 @@ agent::agent(void)
 	speed=new double[2];
 	speed[0]=10;
 	speed[1]=0;
+	alive=1;
 }
+
+agent::agent(const agent &model)
+{
+	coord=new double[2];
+	speed=new double[2];
+	coord[0]=model.get_coord()[0];
+	coord[1]=model.get_coord()[1];
+	speed[0]=model.get_speed()[0];
+	speed[1]=model.get_speed()[1];
+}
+
 // ===========================================================================
 // Destructor
 // ===========================================================================
@@ -53,11 +65,15 @@ double* agent::get_coord(void) const
 	return coord;
 }
 
-	double* agent::get_speed(void) const
+double* agent::get_speed(void) const
 {
 	return speed;
 }
 
+bool agent::is_alive(void) const
+{
+	return alive;
+}
 
 
 bool agent::near(const agent &other) const
@@ -266,40 +282,87 @@ void agent::new_speed(agent* birds, int size, int pos, objet* obj, int nb_obj, d
 
 void agent::new_coord(agent* birds, int size, int pos, objet* obj, int nb_obj,double* vpred, int nb_pred)
 {
-	new_speed(birds, size, pos, obj, nb_obj, vpred, nb_pred);
-	coord[0]=coord[0]+TIME*speed[0];
-	coord[1]=coord[1]+TIME*speed[1];
+	
+	if(alive==1)
+	{
+		new_speed(birds, size, pos, obj, nb_obj, vpred, nb_pred);
+		coord[0]=coord[0]+TIME*speed[0];
+		coord[1]=coord[1]+TIME*speed[1];
 
 
 
 	//if the agent reaches the superior border
-	if(coord[1]<(H)) //+50
-	{
-		speed[1]=speed[1]+1;
-	}
+		if(coord[1]<(H)) //+50
+		{
+			speed[1]=speed[1]+1;
+		}
 
-	//if the agent reaches the inferior border
-	if(coord[1]>(WIDTH-H))
-	{
-		speed[1]=speed[1]-1;
-	}
+		//if the agent reaches the inferior border
+		if(coord[1]>(WIDTH-H))
+		{
+			speed[1]=speed[1]-1;
+		}	
 
-	//if the agent reaches the left border
-	if(coord[0]<(V)) //+50
-	{
-		speed[0]=speed[0]+1;
-	}
+		//if the agent reaches the left border
+		if(coord[0]<(V)) //+50
+		{
+			speed[0]=speed[0]+1;
+		}
 
-	//if the agent reaches the right border
-	if(coord[0]>(HEIGHT-V))
-	{
-		speed[0]=speed[0]-1;
+		//if the agent reaches the right border
+		if(coord[0]>(HEIGHT-V))
+		{
+			speed[0]=speed[0]-1;
+		}
 	}
+	
+
+/*
+		new_speed(birds, size, pos, obj, nb_obj, vpred, nb_pred);
+		coord[0]=coord[0]+TIME*speed[0];
+		coord[1]=coord[1]+TIME*speed[1];
+
+
+
+	//if the agent reaches the superior border
+		if(coord[1]<(H)) //+50
+		{
+			speed[1]=speed[1]+1;
+		}
+
+		//if the agent reaches the inferior border
+		if(coord[1]>(WIDTH-H))
+		{
+			speed[1]=speed[1]-1;
+		}	
+
+		//if the agent reaches the left border
+		if(coord[0]<(V)) //+50
+		{
+			speed[0]=speed[0]+1;
+		}
+
+		//if the agent reaches the right border
+		if(coord[0]>(HEIGHT-V))
+		{
+			speed[0]=speed[0]-1;
+		}
+		*/
+
 }
 
 void agent::print_coord(void) const
 {
 	printf("x= %lf, y= %lf\n", coord[0], coord[1]);
+}
+
+void agent::death(void)
+{
+	coord[0]=-100;
+	coord[1]=-100;
+	speed[0]=0;
+	speed[0]=0;
+	alive=0;
 }
 // ===========================================================================
 // Protected Methods

@@ -16,9 +16,9 @@ int main()
     bwindow win((WIDTH + 100),(HEIGHT+100));
     printf("%d\n",win.init());
     win.map();
-	boid my_boid=boid(500,1);
-	objet* obj=new objet[5];
-	int nb_obj=5;
+	boid my_boid=boid(700,1);
+	int nb_obj=2;
+	objet* obj=new objet[nb_obj];
     for(;;)
     {
 		int ev = win.parse_event();

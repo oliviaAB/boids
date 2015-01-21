@@ -28,6 +28,7 @@ class agent
     // Constructors
     // =======================================================================
     agent(void);
+    agent(const agent &model);
     // =======================================================================
     // Destructor
     // =======================================================================
@@ -37,6 +38,7 @@ class agent
     // =======================================================================
     double* get_coord(void) const;
     double* get_speed(void) const;
+    bool is_alive(void) const;
     // =======================================================================
     // Accessors: setters
     // =======================================================================
@@ -56,10 +58,14 @@ class agent
     void new_speed(agent* birds, int size, int pos,  objet* obj, int nb_obj, double* vpred, int nb_pred);
     void new_coord(agent* birds, int size, int pos,  objet* obj, int nb_obj,double* vpred, int nb_pred);
     void print_coord(void) const;
+    void death(void);
     // =======================================================================
     // Public Attributes
     // =======================================================================
-    protected :
+   
+    //bool alive;
+
+     protected :
     // =======================================================================
     // Forbidden Constructors
     // =======================================================================
@@ -75,6 +81,7 @@ class agent
         exit(EXIT_FAILURE);
     };
     */
+    
     // =======================================================================
     // Protected Methods
     // =======================================================================
@@ -83,6 +90,7 @@ class agent
     // =======================================================================
     double* coord;
     double* speed;
+    bool alive;
     /*
     static double R;
     static double* GAMMA;
