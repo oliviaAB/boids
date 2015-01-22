@@ -214,7 +214,7 @@ double* agent::speed3(agent* birds, int size, int pos, objet* obj, int nb_obj)
 		}
 	}
 
-		if(nb!=0)
+	if(nb!=0)
 	{
 		vo[0]=-vo[0]/nb;
 		vo[1]=-vo[1]/nb;

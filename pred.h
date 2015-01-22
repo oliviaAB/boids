@@ -54,8 +54,8 @@ class pred : public agent
     virtual ~pred(void);
 
     void vrand(void);
-    void up_coord(agent* flock, int size);
-    void up_speed(agent* flock, int size);
+    void up_coord(agent* flock, int size,objet* obj, int nb_obj);
+    void up_speed(agent* flock, int size, objet* obj, int nb_obj);
     int get_time_eaten(void) const;
 
     // =======================================================================

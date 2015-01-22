@@ -71,13 +71,13 @@ void pred::vrand(void)
         double norm=sqrt(speed[0]*speed[0]+speed[1]*speed[1]);
 
        
-        double max=(norm/VPRED);
+        double max=(norm/(VPRED-4));
         speed[0]=speed[0]/max;
         speed[1]=speed[1]/max;
         
 }
 
-void pred::up_speed(agent* flock, int size)
+void pred::up_speed(agent* flock, int size, objet* obj, int nb_obj)
 {
         int i=0;
         double* nearest=new double[2];
@@ -88,13 +88,13 @@ void pred::up_speed(agent* flock, int size)
         {
                 if(flock[i].is_alive()==1)
                 {
-                        norm=sqrt((coord[0]-flock[i].get_coord()[0])*(coord[0]-flock[i].get_coord()[0])  -   (coord[1]-flock[i].get_coord()[1])*(coord[1]-flock[i].get_coord()[1]));
-                        printf("%lf\n", norm);
+                        norm=sqrt((coord[0]-flock[i].get_coord()[0])*(coord[0]-flock[i].get_coord()[0])  + (coord[1]-flock[i].get_coord()[1])*(coord[1]-flock[i].get_coord()[1]));
+                        //printf("%lf\n", norm);
                         if(norm<=CPRED)
                         {       
                                 flock[i].death();
                                 time_eaten=1;
-                                printf("BOUFFE\n");
+                                //printf("BOUFFE\n");
                         }else if(norm<norm_min)
                         {
                                 norm_min=norm;
@@ -120,15 +120,38 @@ void pred::up_speed(agent* flock, int size)
         }
 
 
+    int nb=0;
+    double* vo=new double[2];
+    vo[0]=0;
+    vo[1]=0;
+
+    for(i=0;i<nb_obj;i++)
+    {
+        if(this->near_obs(obj[i])==1)
+        {
+            vo[0]=vo[0]+obj[i].get_coord()[0]-coord[0];
+            vo[1]=vo[1]+obj[i].get_coord()[1]-coord[1];
+            nb++;
+        }
+    }
+
+    if(nb!=0)
+    {
+        vo[0]=-vo[0]/nb;
+        vo[1]=-vo[1]/nb;
+    }
+
+    speed[0]=speed[0]+vo[0];
+    speed[1]=speed[1]+vo[1];
 
 }
 
-void pred::up_coord(agent* flock, int size)
+void pred::up_coord(agent* flock, int size,objet* obj, int nb_obj)
 {
 
         if(time_eaten==0)
         {
-                up_speed(flock, size);
+                up_speed(flock, size, obj, nb_obj);
                 coord[0]=coord[0]+TIME*speed[0];
                 coord[1]=coord[1]+TIME*speed[1];
 

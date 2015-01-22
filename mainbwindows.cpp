@@ -17,7 +17,7 @@ int main()
     printf("%d\n",win.init());
     win.map();
 	boid my_boid=boid(700,1);
-	int nb_obj=2;
+	int nb_obj=10;
 	objet* obj=new objet[nb_obj];
     for(;;)
     {
