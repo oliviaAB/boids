@@ -94,7 +94,7 @@ void pred::up_speed(agent* flock, int size, objet* obj, int nb_obj)
                         {       
                                 flock[i].death();
                                 time_eaten=1;
-                                //printf("BOUFFE\n");
+                                
                         }else if(norm<norm_min)
                         {
                                 norm_min=norm;
@@ -148,6 +148,7 @@ void pred::up_speed(agent* flock, int size, objet* obj, int nb_obj)
 
 void pred::up_coord(agent* flock, int size,objet* obj, int nb_obj)
 {
+
 
         if(time_eaten==0)
         {

@@ -42,12 +42,13 @@ boid::boid(void)
 	pred_flock=NULL;
 	nb_pred=0;
 	time_add=0;
+	time_delete=0;
 }
 
 boid::boid(int a_size, int p_size)
 {
 	flock=new agent[NMAX];
-	pred_flock=new pred[p_size];
+	pred_flock=new pred[p_size+NMAX];
 
 	/*
 	int i=0;
@@ -59,6 +60,7 @@ boid::boid(int a_size, int p_size)
 	nb_agents=a_size;
 	nb_pred=p_size;
 	time_add=0;
+	time_delete=0;
 
 	/*
 	for(i=0;i<a_size;i++)
@@ -72,7 +74,7 @@ boid::boid(int a_size, int p_size)
 boid::boid(const boid &model)
 {
 	flock=new agent[NMAX];
-	pred_flock=new pred[model.get_nb_pred()];
+	pred_flock=new pred[model.get_nb_pred()+NMAX];
 	nb_agents=model.get_nb_agents();
 	nb_pred=model.get_nb_pred();
 
@@ -87,6 +89,7 @@ boid::boid(const boid &model)
 	}
 
 	time_add=model.get_time_add();
+	time_delete=model.get_time_delete();
 
 	//memcpy(flock, model.get_flock(), model.get_nb_agents());
 	//memcpy(pred_flock, model.get_pred_flock(), model.get_nb_pred());
@@ -133,8 +136,10 @@ int boid::get_time_add(void) const
 	return time_add;
 }
 
-
-
+int boid::get_time_delete(void) const
+{
+	return time_delete;
+}
 
 void boid::update( objet* obj, int nb_obj)
 {
@@ -158,21 +163,52 @@ void boid::update( objet* obj, int nb_obj)
 		//flock[i].print_coord();
 	}
 
+
+
+	
 	time_add++;
-	int adder=MU*nb_agents*(1-nb_agents/NMAX);
+	int adder=(int)(10000/(MU*nb_agents*(1-nb_agents/NMAX)));
+	//printf("adder %d\n",adder);
+/*
 	if(time_add==adder)
 	{
 		add_agent();
 		time_add=0;
+		printf("ADD PIOUPIOU\n");
+	}
+
+	time_delete++;
+	if(time_delete==(1000/nb_pred) && nb_pred>1)
+	{
+		delete_pred();
+		printf("ET BIM UN EN MOINS!!! \n");
+	}
+	
+	int ag_to_add=0;
+	for(i=0;i<nb_pred;i++)
+	{
+		if(pred_flock[i].get_time_eaten()==1)
+		{
+			ag_to_add++;
+		}
 	}
 
 
+	nb_pred=nb_pred+ag_to_add;
+	printf("%d\n",nb_pred);
+*/
 	//printf("UPDATE DONE\n");
 }
 
 void boid::add_agent()
 {
 	nb_agents++;
+}
+
+
+void boid::delete_pred()
+{
+	nb_pred--;
 }
 
 // ===========================================================================

@@ -64,6 +64,8 @@ class boid
     pred* get_pred_flock(void) const;
     int get_nb_pred(void) const;
     int get_time_add(void) const;
+    int get_time_delete(void) const;
+
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
@@ -77,6 +79,7 @@ class boid
     // =======================================================================
     void update( objet* obj, int nb_obj);
     void add_agent(void);
+    void delete_pred(void);
     // =======================================================================
     //                             Public Attributes
     // =======================================================================
@@ -117,6 +120,7 @@ class boid
     pred* pred_flock;
     int nb_pred;
     int time_add;
+    int time_delete;
 
 
 };

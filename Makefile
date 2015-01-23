@@ -30,10 +30,10 @@ bwindow.o: bwindow.cpp bwindow.h agent.h boid.h pred.h
 objet.o: objet.h objet.cpp parameters.h
 	g++ -Wall objet.cpp -c
 
-predator.o: predator.cpp predator.h
+predator.o: predator.cpp predator.h parameters.h
 	g++ -Wall predator.cpp -c
 
-pred.o: pred.cpp pred.h
+pred.o: pred.cpp pred.h parameters.h
 	g++ -Wall pred.cpp -c
 
 

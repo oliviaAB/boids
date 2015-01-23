@@ -1,5 +1,5 @@
-#define WIDTH 800
-#define HEIGHT 800
+#define WIDTH 640
+#define HEIGHT 480
 #define WIDTHCRE 500
 #define HEIGHTCRE 500
 #define RADIUS 70
@@ -7,9 +7,9 @@
 #define RPRED 70
 #define CPRED 7
 #define TIME  1
-#define GAMMA1 0.30 //0.15
-#define GAMMA2 0.30 //0.15
-#define GAMMA3 2 //1
+#define GAMMA1 0.030 //0.15
+#define GAMMA2 0.040 //0.15
+#define GAMMA3 0.2 //1
 #define GAMMA4 15
 #define VMAX 10
 #define H 100	
