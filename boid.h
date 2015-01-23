@@ -49,6 +49,7 @@ class boid
     // =======================================================================
     boid(void);
     boid(int a_size, int p_size);
+    boid(const boid &model);
 
     // =======================================================================
     //                                Destructor
@@ -62,6 +63,7 @@ class boid
     int get_nb_agents(void) const;
     pred* get_pred_flock(void) const;
     int get_nb_pred(void) const;
+    int get_time_add(void) const;
     // =======================================================================
     //                            Accessors: setters
     // =======================================================================
@@ -74,6 +76,7 @@ class boid
     //                              Public Methods
     // =======================================================================
     void update( objet* obj, int nb_obj);
+    void add_agent(void);
     // =======================================================================
     //                             Public Attributes
     // =======================================================================
@@ -113,6 +116,7 @@ class boid
     int nb_agents;
     pred* pred_flock;
     int nb_pred;
+    int time_add;
 
 
 };

@@ -16,9 +16,12 @@ int main()
     bwindow win((WIDTH + 100),(HEIGHT+100));
     printf("%d\n",win.init());
     win.map();
-	boid my_boid=boid(700,1);
+	boid my_boid=boid(2,0);
 	int nb_obj=10;
 	objet* obj=new objet[nb_obj];
+
+
+
     for(;;)
     {
 		int ev = win.parse_event();
@@ -41,6 +44,7 @@ int main()
 		//win.draw_fsquare(0,400,0,400,0x00FF00);
 		win.draw_boid(my_boid, obj, nb_obj);
 		my_boid.update(obj, nb_obj);
+
 		
 
 		usleep(50000); //50000

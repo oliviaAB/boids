@@ -17,6 +17,7 @@
 //                                 Project Files
 // ===========================================================================
 #include "boid.h"
+#include <cstring>
 
 
 
@@ -40,11 +41,12 @@ boid::boid(void)
 	nb_agents=0;
 	pred_flock=NULL;
 	nb_pred=0;
+	time_add=0;
 }
 
 boid::boid(int a_size, int p_size)
 {
-	flock=new agent[a_size];
+	flock=new agent[NMAX];
 	pred_flock=new pred[p_size];
 
 	/*
@@ -56,6 +58,7 @@ boid::boid(int a_size, int p_size)
 	*/
 	nb_agents=a_size;
 	nb_pred=p_size;
+	time_add=0;
 
 	/*
 	for(i=0;i<a_size;i++)
@@ -63,6 +66,31 @@ boid::boid(int a_size, int p_size)
 		flock[i].print_coord();
 	}
 	*/
+}
+
+
+boid::boid(const boid &model)
+{
+	flock=new agent[NMAX];
+	pred_flock=new pred[model.get_nb_pred()];
+	nb_agents=model.get_nb_agents();
+	nb_pred=model.get_nb_pred();
+
+	int i=0;
+	for(i=0;i<NMAX;i++)
+	{
+		flock[i]=model.get_flock()[i];
+	}
+	for(i=0;i<nb_pred;i++)
+	{
+		pred_flock[i]=model.get_pred_flock()[i];
+	}
+
+	time_add=model.get_time_add();
+
+	//memcpy(flock, model.get_flock(), model.get_nb_agents());
+	//memcpy(pred_flock, model.get_pred_flock(), model.get_nb_pred());
+	
 }
 
 // ===========================================================================
@@ -100,6 +128,12 @@ int boid::get_nb_pred(void) const
 	return nb_pred;
 }
 
+int boid::get_time_add(void) const
+{
+	return time_add;
+}
+
+
 
 
 void boid::update( objet* obj, int nb_obj)
@@ -124,8 +158,21 @@ void boid::update( objet* obj, int nb_obj)
 		//flock[i].print_coord();
 	}
 
+	time_add++;
+	int adder=MU*nb_agents*(1-nb_agents/NMAX);
+	if(time_add==adder)
+	{
+		add_agent();
+		time_add=0;
+	}
+
 
 	//printf("UPDATE DONE\n");
+}
+
+void boid::add_agent()
+{
+	nb_agents++;
 }
 
 // ===========================================================================

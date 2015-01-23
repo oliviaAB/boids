@@ -109,7 +109,7 @@ void pred::up_speed(agent* flock, int size, objet* obj, int nb_obj)
         {
                 speed[0]=nearest[0]-coord[0];
                 speed[1]=nearest[1]-coord[1];
-                 norm=sqrt(speed[0]*speed[0]+speed[1]*speed[1]);
+                norm=sqrt(speed[0]*speed[0]+speed[1]*speed[1]);
 
                 double max=(norm/VPRED);
                 speed[0]=speed[0]/max;
@@ -141,8 +141,8 @@ void pred::up_speed(agent* flock, int size, objet* obj, int nb_obj)
         vo[1]=-vo[1]/nb;
     }
 
-    speed[0]=speed[0]+vo[0];
-    speed[1]=speed[1]+vo[1];
+    speed[0]=speed[0]+0.5*vo[0];
+    speed[1]=speed[1]+0.5*vo[1];
 
 }
 
