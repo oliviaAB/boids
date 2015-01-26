@@ -15,7 +15,8 @@
 #define H 100	
 #define V 100
 #define VPRED 12
-#define PREDSLEEP 10
+#define PREDSLEEP 50
 #define NMAX 500
+#define PMAX 500
 #define MU 1
 //#define GAMMA {1,1,1}

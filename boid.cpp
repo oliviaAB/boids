@@ -48,7 +48,7 @@ boid::boid(void)
 boid::boid(int a_size, int p_size)
 {
 	flock=new agent[NMAX];
-	pred_flock=new pred[p_size+NMAX];
+	pred_flock=new pred[PMAX];
 
 	/*
 	int i=0;
@@ -164,13 +164,11 @@ void boid::update( objet* obj, int nb_obj)
 	}
 
 
-
-	
 	time_add++;
-	int adder=(int)(10000/(MU*nb_agents*(1-nb_agents/NMAX)));
+	int adder=(int)(100/(MU*nb_agents*(1-nb_agents/NMAX)));
 	//printf("adder %d\n",adder);
-/*
-	if(time_add==adder)
+
+	if(time_add==adder && nb_agents<NMAX)
 	{
 		add_agent();
 		time_add=0;
@@ -178,26 +176,33 @@ void boid::update( objet* obj, int nb_obj)
 	}
 
 	time_delete++;
-	if(time_delete==(1000/nb_pred) && nb_pred>1)
+	printf("MOINS %d\n",(PMAX/nb_pred));
+	if(time_delete==(PMAX/nb_pred) && nb_pred>1)
 	{
 		delete_pred();
 		printf("ET BIM UN EN MOINS!!! \n");
 	}
+	if(time_delete>(PMAX/nb_pred))
+	{
+		time_delete=0;
+		printf("OOOOOOOOO\n");
+	}
+
 	
 	int ag_to_add=0;
 	for(i=0;i<nb_pred;i++)
 	{
-		if(pred_flock[i].get_time_eaten()==1)
+		if(pred_flock[i].get_time_eaten()==1 && (nb_pred+ag_to_add)<PMAX)
 		{
-			ag_to_add++;
+			ag_to_add++;	
 		}
 	}
 
-
+	printf("ag_to_add: %d\n",ag_to_add);
 	nb_pred=nb_pred+ag_to_add;
-	printf("%d\n",nb_pred);
-*/
+
 	//printf("UPDATE DONE\n");
+	
 }
 
 void boid::add_agent()

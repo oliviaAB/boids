@@ -17,7 +17,8 @@ int main()
     printf("%d\n",win.init());
     win.map();
 	boid my_boid=boid(100,1);
-	int nb_obj=5;
+	// pour tester nb_pred +1 : 10 et 1
+	int nb_obj=2;
 	objet* obj=new objet[nb_obj];
 
 
